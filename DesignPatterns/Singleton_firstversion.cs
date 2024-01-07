@@ -11,20 +11,11 @@ namespace DesignPatterns
     {
         private static int counter = 0;
 
-        private static Singleton_firstversion instance = null;
-        private static Object obj = new object();
+        private static readonly Lazy<Singleton_firstversion> instance = new Lazy<Singleton_firstversion>(() => new Singleton_firstversion());
         public static Singleton_firstversion GetInstance {
             get
             {
-                if (instance == null)
-                {
-                    lock (obj)
-                    {
-                        if (instance == null)
-                            instance = new Singleton_firstversion();
-                    }
-                }
-                return instance;
+                return instance.Value;
             }
         }
         private Singleton_firstversion()
